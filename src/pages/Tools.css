@@ -1,0 +1,31 @@
+.tools-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tools-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.tools-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.type-filter {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.type-tag {
+  cursor: pointer;
+  border-radius: 16px;
+  padding: 2px 12px;
+}

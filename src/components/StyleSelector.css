@@ -1,0 +1,43 @@
+.style-selector {
+  margin: 16px 0;
+}
+
+.style-card {
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.style-card-active {
+  border-color: #1677ff;
+  box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
+}
+
+.style-color-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 0 auto 4px;
+  border: 1px solid #e8e8e8;
+}
+
+.style-label {
+  font-size: 12px;
+  display: block;
+}
+
+.style-check {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  background: #1677ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 10px;
+}
