@@ -10,7 +10,7 @@ export const tools = [
     tags: ['核心'],
     icon: 'SafetyCertificateOutlined',
     params: ['image', 'elderAge', 'mobility'],
-    cover: '/assets/tool-covers/assess.jpg',
+    cover: '/aging_img/ai_aging_assess.jpg',
   },
   {
     id: 'hazard-detect',
@@ -21,7 +21,7 @@ export const tools = [
     tags: ['核心'],
     icon: 'WarningOutlined',
     params: ['image', 'detectType'],
-    cover: '/assets/tool-covers/hazard.jpg',
+    cover: '/aging_img/ai_safety_check.jpg',
   },
 
   // === 旧房改造 ===
@@ -34,7 +34,7 @@ export const tools = [
     tags: ['核心', 'Hot'],
     icon: 'HomeOutlined',
     params: ['image', 'style', 'prompt'],
-    cover: '/assets/tool-covers/old-house.jpg',
+    cover: '/aging_img/ai_old_house_aging_renovate.jpg',
   },
   {
     id: 'ai-style-convert',
@@ -45,7 +45,7 @@ export const tools = [
     tags: [],
     icon: 'RetweetOutlined',
     params: ['image', 'targetStyle'],
-    cover: '/assets/tool-covers/style-convert.jpg',
+    cover: '/aging_img/ai_aging_style_convert.jpg',
   },
   {
     id: 'ai-room-renovate',
@@ -56,7 +56,7 @@ export const tools = [
     tags: ['Hot'],
     icon: 'ToolOutlined',
     params: ['image', 'renovateScope', 'style'],
-    cover: '/assets/tool-covers/renovate.jpg',
+    cover:'/aging_img/ai_whole_house_aging_renew.jpg',
   },
 
   // === 卫浴改造 ===
@@ -69,7 +69,7 @@ export const tools = [
     tags: ['核心'],
     icon: 'DashboardOutlined',
     params: ['image', 'bathType', 'style'],
-    cover: '/assets/tool-covers/bathroom.jpg',
+    cover: '/aging_img/ai_barrier_bath_rebuild.jpg',
   },
   {
     id: 'bathroom-shower',
@@ -80,7 +80,7 @@ export const tools = [
     tags: [],
     icon: 'ThunderboltOutlined',
     params: ['image', 'showerType'],
-    cover: '/assets/tool-covers/shower.svg',
+    cover: '/aging_img/ai_shower_room_rebuild.jpg',
   },
   {
     id: 'bathroom-toilet',
@@ -91,7 +91,7 @@ export const tools = [
     tags: [],
     icon: 'SafetyOutlined',
     params: ['image', 'toiletType'],
-    cover: '/assets/tool-covers/toilet.jpg',
+    cover: '/aging_img/ai_toilet_area_rebuild.jpg',
   },
 
   // === 地面改造 ===
@@ -104,7 +104,7 @@ export const tools = [
     tags: ['核心'],
     icon: 'CompressOutlined',
     params: ['image', 'floorMaterial'],
-    cover: '/assets/tool-covers/floor.svg',
+    cover: 'C:/aging_img/ai_anti_slip_floor_renew.jpg',
   },
   {
     id: 'threshold-remove',
@@ -115,7 +115,7 @@ export const tools = [
     tags: [],
     icon: 'MinusOutlined',
     params: ['image', 'thresholdType'],
-    cover: '/assets/tool-covers/threshold.jpg',
+    cover: '/aging_img/ai_threshold_remove_rebuild.jpg',
   },
 
   // === 扶手与安全 ===
@@ -128,7 +128,7 @@ export const tools = [
     tags: ['核心'],
     icon: 'PullRequestOutlined',
     params: ['image', 'railLocation', 'style'],
-    cover: '/assets/tool-covers/handrail.jpg',
+    cover: '',
   },
   {
     id: 'stair-safety',
@@ -139,7 +139,7 @@ export const tools = [
     tags: [],
     icon: 'RiseOutlined',
     params: ['image', 'stairType'],
-    cover: '/assets/tool-covers/stair.jpg',
+    cover: 'C:/aging_img/ai_stair_aging_rebuild.jpg',
   },
 
   // === 照明与智能 ===

@@ -3,6 +3,7 @@ import {
   HomeOutlined, AppstoreOutlined, PictureOutlined,
   RobotOutlined, DashboardOutlined, UserOutlined,
   HeartOutlined, HistoryOutlined, SafetyCertificateOutlined,
+  ShoppingCartOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import useAppStore from '../stores/useAppStore';
@@ -20,6 +21,7 @@ export default function MainLayout() {
   const menuItems = [
     { key: '/', icon: <HomeOutlined />, label: '首页' },
     { key: '/tools', icon: <AppstoreOutlined />, label: '改造工具' },
+    { key: '/shop', icon: <ShoppingCartOutlined />, label: '安颐家商城' },
     { key: '/canvas', icon: <DashboardOutlined />, label: 'AI画布' },
     { key: '/agent', icon: <RobotOutlined />, label: 'AI顾问' },
   ];
