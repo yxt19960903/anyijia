@@ -1,11 +1,11 @@
-import { Typography, Button, Row, Col, Card, Space } from 'antd';
+import { Typography, Button, Row, Col, Card, Statistic, Space, Divider, Image } from 'antd';
 import {
   RocketOutlined, SafetyCertificateOutlined, HomeOutlined,
   DashboardOutlined, ArrowRightOutlined, HeartOutlined,
   EyeOutlined, ThunderboltOutlined, CheckCircleOutlined,
   PhoneOutlined, TeamOutlined, ToolOutlined,
   SearchOutlined, FileProtectOutlined, BulbOutlined,
-  StarOutlined, ShoppingCartOutlined,
+  StarOutlined, UserOutlined, ClockCircleOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { tools } from '../tools/registry';
@@ -15,17 +15,16 @@ import './Home.css';
 const { Title, Text, Paragraph } = Typography;
 
 const quickEntries = [
-  { key: 'quick', icon: <ThunderboltOutlined />, label: '一键改造', desc: '上传照片快速出图', color: '#A0845C', path: '/tools' },
-  { key: 'chat', icon: <HeartOutlined />, label: 'AI顾问', desc: '对话式适老方案', color: '#C4A882', path: '/agent' },
-  { key: 'canvas', icon: <DashboardOutlined />, label: '画布设计', desc: '一站式创作画布', color: '#8B7355', path: '/canvas' },
-  { key: 'shop', icon: <ShoppingCartOutlined />, label: '适老商城', desc: '精选适老家具', color: '#D4A574', path: '/shop' },
+  { key: 'quick', icon: <ThunderboltOutlined />, label: '一键改造', desc: '上传照片快速出图', color: '#A0845C' },
+  { key: 'chat', icon: <HeartOutlined />, label: 'AI顾问', desc: '对话式适老方案', color: '#C4A882' },
+  { key: 'canvas', icon: <DashboardOutlined />, label: '画布设计', desc: '一站式创作画布', color: '#8B7355' },
 ];
 
-const processSteps = [
-  { icon: <SearchOutlined />, title: '安全评估', desc: 'AI识别居家安全隐患', step: 1 },
-  { icon: <FileProtectOutlined />, title: '方案生成', desc: '一键生成适老化改造方案', step: 2 },
-  { icon: <BulbOutlined />, title: '效果预览', desc: 'AI渲染改造效果图', step: 3 },
-  { icon: <CheckCircleOutlined />, title: '施工落地', desc: '专业团队施工保障', step: 4 },
+const features = [
+  { icon: <SafetyCertificateOutlined />, title: '安全评估', desc: 'AI智能识别居家安全隐患' },
+  { icon: <HomeOutlined />, title: '旧房改造', desc: '一键生成适老化改造方案' },
+  { icon: <EyeOutlined />, title: '无障碍设计', desc: '轮椅动线、门槛消除全覆盖' },
+  { icon: <ToolOutlined />, title: '专业工具', desc: '35+适老化改造AI工具' },
 ];
 
 const scenarios = [
@@ -37,23 +36,36 @@ const scenarios = [
   { img: '/assets/elderly-care-6.jpg', title: '紧急呼叫系统', desc: '卧室、卫浴、走廊一键呼叫' },
 ];
 
+const processSteps = [
+  { icon: <SearchOutlined />, title: '安全评估', desc: 'AI识别居家安全隐患', step: 1 },
+  { icon: <FileProtectOutlined />, title: '方案生成', desc: '一键生成适老化改造方案', step: 2 },
+  { icon: <BulbOutlined />, title: '效果预览', desc: 'AI渲染改造效果图', step: 3 },
+  { icon: <CheckCircleOutlined />, title: '施工落地', desc: '专业团队施工保障', step: 4 },
+];
+
 const testimonials = [
   { name: '张女士', role: '为父母改造', avatar: '张', content: '用了安颐家的AI评估，才发现父母家卫生间有这么多安全隐患。改造后老人特别满意，洗澡再也不怕滑了！', rating: 5 },
   { name: '李先生', role: '旧房适老改造', avatar: '李', content: '一键生成了好几种改造方案，效果很直观。最终选了原木温馨风格，父母说比以前安全多了也好看多了。', rating: 5 },
   { name: '王阿姨', role: '自住房改造', avatar: '王', content: '年纪大了腿脚不便，AI帮我规划了全屋扶手和防滑地面，现在走路踏实多了。科技真的能温暖生活！', rating: 5 },
 ];
 
+const stats = [
+  { icon: <TeamOutlined />, value: 12000, suffix: '+', label: '服务家庭' },
+  { icon: <SafetyCertificateOutlined />, value: 98, suffix: '%', label: '满意度' },
+  { icon: <ToolOutlined />, value: 35, suffix: '+', label: 'AI工具' },
+  { icon: <ClockCircleOutlined />, value: 3, suffix: '天', label: '平均出图' },
+];
+
 export default function Home() {
   const navigate = useNavigate();
+  const hotTools = tools.filter((t) => t.tags?.includes('Hot')).slice(0, 4);
+  const coreTools = tools.filter((t) => t.tags?.includes('核心')).slice(0, 4);
 
-  // 合并核心+热门，去重，最多展示8个
-  const featuredTools = tools
-    .filter((t) => t.tags?.includes('核心') || t.tags?.includes('Hot'))
-    .reduce((acc, t) => {
-      if (!acc.find((x) => x.id === t.id)) acc.push(t);
-      return acc;
-    }, [])
-    .slice(0, 8);
+  const typeGroups = {};
+  tools.forEach((t) => {
+    if (!typeGroups[t.type]) typeGroups[t.type] = [];
+    typeGroups[t.type].push(t);
+  });
 
   return (
     <div className="home-page">
@@ -69,6 +81,11 @@ export default function Home() {
           <Paragraph style={{ fontSize: 16, maxWidth: 600, color: 'rgba(255,255,255,0.9)' }}>
             以AI科技守护银发生活，让每一位长者安居无忧。从安全评估到改造出图，全流程AI赋能适老化改造。
           </Paragraph>
+          <Space size="large" style={{ marginTop: 24 }}>
+            <Statistic title="AI工具" value={tools.length} suffix="个" valueStyle={{ color: '#fff' }} />
+            <Statistic title="改造场景" value={12} suffix="种" valueStyle={{ color: '#fff' }} />
+            <Statistic title="适老风格" value={12} suffix="种" valueStyle={{ color: '#fff' }} />
+          </Space>
           <div style={{ marginTop: 24, display: 'flex', gap: 12 }}>
             <Button
               size="large"
@@ -93,39 +110,28 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 快捷入口 */}
-      <div className="section">
-        <Row gutter={16}>
-          {quickEntries.map((entry) => (
-            <Col key={entry.key} xs={12} sm={6}>
-              <Card
-                hoverable
-                className="quick-entry-card"
-                onClick={() => navigate(entry.path)}
-              >
-                <div className="quick-entry-icon" style={{ backgroundColor: entry.color + '20', color: entry.color }}>
-                  {entry.icon}
-                </div>
-                <Title level={5}>{entry.label}</Title>
-                <Text type="secondary">{entry.desc}</Text>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+      {/* 数据统计 */}
+      <div className="stats-section">
+        {stats.map((s, i) => (
+          <div key={i} className="stat-item">
+            <div className="stat-icon">{s.icon}</div>
+            <div className="stat-value">{s.value}<span className="stat-suffix">{s.suffix}</span></div>
+            <div className="stat-label">{s.label}</div>
+          </div>
+        ))}
       </div>
 
-      {/* 精选工具（核心+热门合并去重） */}
+      {/* 核心能力 */}
       <div className="section">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Title level={4} style={{ margin: 0 }}>精选工具</Title>
-          <Button type="link" icon={<ArrowRightOutlined />} onClick={() => navigate('/tools')}>
-            查看全部 {tools.length} 个工具
-          </Button>
-        </div>
+        <Title level={4} style={{ textAlign: 'center' }}>核心能力</Title>
         <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
-          {featuredTools.map((tool) => (
-            <Col key={tool.id} xs={24} sm={12} md={6}>
-              <ToolCard tool={tool} />
+          {features.map((f, i) => (
+            <Col key={i} xs={12} sm={6}>
+              <Card className="feature-card" hoverable>
+                <div className="feature-icon">{f.icon}</div>
+                <Title level={5}>{f.title}</Title>
+                <Text type="secondary">{f.desc}</Text>
+              </Card>
             </Col>
           ))}
         </Row>
@@ -147,6 +153,28 @@ export default function Home() {
         </div>
       </div>
 
+      {/* 创作方式 */}
+      <div className="section">
+        <Title level={4}>改造方式</Title>
+        <Row gutter={16}>
+          {quickEntries.map((entry) => (
+            <Col key={entry.key} xs={24} sm={8}>
+              <Card
+                hoverable
+                className="quick-entry-card"
+                onClick={() => navigate(entry.key === 'canvas' ? '/canvas' : entry.key === 'chat' ? '/agent' : '/tools')}
+              >
+                <div className="quick-entry-icon" style={{ backgroundColor: entry.color + '20', color: entry.color }}>
+                  {entry.icon}
+                </div>
+                <Title level={5}>{entry.label}</Title>
+                <Text type="secondary">{entry.desc}</Text>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
+
       {/* 改造场景 */}
       <div className="section">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -166,6 +194,40 @@ export default function Home() {
               >
                 <Card.Meta title={s.title} description={s.desc} />
               </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
+
+      {/* 核心工具 */}
+      <div className="section">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Title level={4} style={{ margin: 0 }}>核心工具</Title>
+          <Button type="link" icon={<ArrowRightOutlined />} onClick={() => navigate('/tools')}>
+            查看全部
+          </Button>
+        </div>
+        <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+          {coreTools.map((tool) => (
+            <Col key={tool.id} xs={24} sm={12} md={6}>
+              <ToolCard tool={tool} />
+            </Col>
+          ))}
+        </Row>
+      </div>
+
+      {/* 热门工具 */}
+      <div className="section">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Title level={4} style={{ margin: 0 }}>热门工具</Title>
+          <Button type="link" icon={<ArrowRightOutlined />} onClick={() => navigate('/tools')}>
+            查看全部
+          </Button>
+        </div>
+        <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+          {hotTools.map((tool) => (
+            <Col key={tool.id} xs={24} sm={12} md={6}>
+              <ToolCard tool={tool} />
             </Col>
           ))}
         </Row>
@@ -213,6 +275,33 @@ export default function Home() {
           </Button>
         </div>
       </div>
+
+      {/* 分类预览 */}
+      {Object.entries(typeGroups).slice(0, 3).map(([type, typeTools]) => (
+        <div key={type} className="section">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Title level={4} style={{ margin: 0 }}>{typeLabels[type] || type}</Title>
+            <Button type="link" icon={<ArrowRightOutlined />} onClick={() => navigate(`/tools?type=${type}`)}>
+              更多
+            </Button>
+          </div>
+          <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+            {typeTools.slice(0, 4).map((tool) => (
+              <Col key={tool.id} xs={24} sm={12} md={6}>
+                <ToolCard tool={tool} />
+              </Col>
+            ))}
+          </Row>
+        </div>
+      ))}
     </div>
   );
 }
+
+const typeLabels = {
+  drawing: '绘图工具',
+  modify: '改造工具',
+  optimize: '优化工具',
+  convert: '转换工具',
+  other: '智能体',
+};
